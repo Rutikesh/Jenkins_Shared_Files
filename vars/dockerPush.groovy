@@ -9,8 +9,7 @@ def call(String ProjectName, String ImageTag) {
         )
     ]) {
         sh """
-            set -e
-            echo "${DOCKER_PASS}" | docker login -u "{$DOCKER_USER}" --password-stdin
+            docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
             docker tag ${ProjectName}:${ImageTag} ${DOCKER_USER}/${ProjectName}:${ImageTag}
             docker push ${DOCKER_USER}/${ProjectName}:${ImageTag}
         """
